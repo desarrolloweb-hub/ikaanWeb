@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<template id="__bundler_thumbnail" data-bg-color="#f3f2f2">
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" fill="#f3f2f2"/>
+    <text x="100" y="115" font-family="serif" font-size="60" fill="#7d5411" text-anchor="middle">i</text>
+  </svg>
+</template>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bodas en Ikaan Villa Spa</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Lora:wght@400;600&display=swap');
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Lora',serif;background:#f3f2f2;color:#201f1d;text-wrap:pretty}
+@keyframes contactoGradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="max-width:1600px;margin:0 auto;background:#f3f2f2">
+
+  <!-- NAV -->
+  <nav style="position: absolute; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 56px; background: transparent">
+    <img src="assets/ikaan-logo-full.png" alt="ikaan villa spa" style="height:68px;display:block;filter:brightness(0) invert(1)">
+    <div style="display:flex;align-items:center;gap:36px;flex-wrap:wrap">
+      <a href="#espacios" style="color:#f8f4f4;text-decoration:none;font-size:14px" style-hover="color:#b68235">Espacios</a>
+      <a href="#paquetes" style="color:#f8f4f4;text-decoration:none;font-size:14px" style-hover="color:#b68235">Paquetes</a>
+      <a href="#historias" style="color:#f8f4f4;text-decoration:none;font-size:14px" style-hover="color:#b68235">Historias</a>
+      <a href="#galeria" style="color:#f8f4f4;text-decoration:none;font-size:14px" style-hover="color:#b68235">Galería</a>
+      <a href="#ubicacion" style="color:#f8f4f4;text-decoration:none;font-size:14px" style-hover="color:#b68235">Ubicación</a>
+      <div style="position:relative">
+        <button onClick="{{ toggleMenu }}" aria-label="Menú" style="appearance:none;-webkit-appearance:none;width:44px;height:44px;padding:0;margin:0;border-radius:50%;border:1px solid #f8f4f4;background:none;background-color:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:none" style-hover="background:radial-gradient(circle at top right, #9CBEC2, transparent 70%)">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <span style="display:block;width:18px;height:1.5px;background:#f8f4f4"></span>
+            <span style="display:block;width:18px;height:1.5px;background:#f8f4f4"></span>
+            <span style="display:block;width:18px;height:1.5px;background:#f8f4f4"></span>
+          </div>
+        </button>
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:56px;right:0;background:rgba(255,255,255,0.72);backdrop-filter:blur(10px);border-radius:14px;box-shadow:0 20px 40px -16px rgba(32,31,29,0.25),0 2px 8px rgba(32,31,29,0.08);padding:10px;display:flex;flex-direction:column;min-width:180px;overflow:hidden">
+            <a href="#" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Inicio</a>
+            <a href="#paquetes" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Servicios</a>
+            <a href="#" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Boutique</a>
+            <a href="#galeria" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Galería</a>
+            <a href="#contacto" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Contacto</a>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section style="position:relative;height:88vh;min-height:620px;overflow:hidden">
+    <div style="position:absolute;inset:0">
+      <image-slot id="hero-bg" shape="rect" placeholder="Foto de boda en jardín de la hacienda Ikaan" style="width:100%;height:100%"></image-slot>
+    </div>
+    <video autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      <source src="assets/hero-bodas.mp4" type="video/mp4">
+    </video>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(32,31,29,0.10) 0%, rgba(32,31,29,0.60) 100%);pointer-events:none"></div>
+    <div style="position:absolute;left:0;right:0;bottom:0;padding:0 56px 72px;max-width:760px;color:#f8f4f4">
+      <span style="display:block;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:#f8f4f4;margin-bottom:16px;opacity:0.85">Bodas en Ikaan</span>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(42px,6vw,74px);line-height:1.08;margin:0;text-box:trim-both cap alphabetic">El escenario holístico para la boda de tus sueños</h1>
+      
+      <p style="font-family: 'Lora',serif; font-size: 18px; line-height: 1.6; color: rgba(248,244,244,0.92); max-width: 520px; margin: 22px 0 0; margin-top: 35px"><i data-path-to-node="19,2,0" data-index-in-node="20" style="caret-color: rgb(0, 0, 0); color: #f3f2f2; text-decoration-thickness: auto; text-decoration-style: solid">Un santuario natural diseñado para transformar el día más importante de tu vida en un ritual inolvidable.</i></p><div style="display:flex;gap:16px;margin-top:34px;flex-wrap:wrap">
+        <a href="#contacto" style="display: inline-flex; align-items: center; font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 15px; color: #201f1d; border: 1px solid #f8f4f4; border-radius: 4px; padding: 14px 28px; text-decoration: none; background-color: #8DB4B7" style-hover="background:#eae7e7">Agendar visita</a>
+        <a href="{{ whatsappHref }}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;color:#f8f4f4;border:1px solid #f8f4f4;border-radius:4px;padding:14px 28px;text-decoration:none" style-hover="background:rgba(248,244,244,0.15)">Escribir por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" ref="{{ sectionRef }}" style="padding:96px 56px;border-bottom:1px solid rgba(32,31,29,0.16);background-color:#f3f2f2">
+  <div style="max-width:1100px;margin:0 auto;border-radius:28px;overflow:hidden;position:relative;background-color:#eae7e7;box-shadow:0 30px 60px -20px rgba(32,31,29,0.35),0 8px 20px rgba(32,31,29,0.12);transition:transform .4s ease,box-shadow .4s ease" style-hover="transform:translateY(-8px);box-shadow:0 40px 72px -18px rgba(32,31,29,0.42),0 10px 24px rgba(32,31,29,0.15)">
+    <div style="position:absolute;inset:0;background:linear-gradient(120deg,#ffffff 0%,#cfe6e8 25%,#ffffff 50%,#9CBEC2 75%,#ffffff 100%);background-size:300% 300%;opacity:0.55;animation:contactoGradientMove 18s ease-in-out infinite;pointer-events:none"></div>
+    <div style="display:flex;align-items:flex-start;position:relative;padding:48px">
+      <div style="width:{{ textWidth }};transition:{{ textTransitionStyle }},opacity 1s ease,transform 1s ease;opacity:{{ contactFadeOpacity }};transform:{{ contactFadeTransform }};display:flex;flex-direction:column;align-items:{{ textItemsAlign }};text-align:{{ textAlign }}">
+        <span style="display:block;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#79706B;margin-bottom:14px">Contacto</span>
+        <h2 style="font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 50px; line-height: 1.08; margin: 0 0 20px; max-width: 16ch">Cuéntanos la boda de tus sueños</h2>
+        <p style="font-size: 12px; line-height: 1.7; color: rgba(32,31,29,0.78); max-width: 46ch; margin: 0 0 32px">Nosotros te acompañaremos a materializar cada detalle para tu día especial.</p>
+        <button type="button" onClick="{{ toggleContact }}" style="display:inline-flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;color:#ffffff;background:#79706B;border:1px solid #79706B;border-radius:4px;padding:14px 28px;cursor:pointer" style-hover="background:#655d59;border-color:#655d59">
+          <span>{{ contactToggleLabel }}</span>
+          <span style="font-size:18px;line-height:1">{{ contactIcon }}</span>
+        </button>
+      </div>
+      <div style="width:{{ formOuterWidth }};margin-left:{{ formMarginLeft }};opacity:{{ formOpacity }};transform:{{ formTransform }};transition:width 0.9s cubic-bezier(0.65,0,0.35,1),margin-left 0.9s cubic-bezier(0.65,0,0.35,1),opacity 0.7s ease 0.15s,transform 0.9s cubic-bezier(0.65,0,0.35,1);flex-shrink:0;overflow:hidden">
+        <div style="width:460px;background:#ffffff;border-radius:20px;box-shadow:0 24px 48px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);overflow:hidden">
+    <form onSubmit="{{ handleSubmit }}" style="max-height:{{ innerMaxHeight }};opacity:{{ innerOpacity }};overflow:hidden;transition:max-height 0.8s cubic-bezier(0.65,0,0.35,1),opacity 0.7s ease;padding:36px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px">
+      <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:#7d5411;padding:20px 0">Gracias — hemos recibido tu solicitud. Te contactaremos pronto.</div>
+      </sc-if>
+      <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <label style="display:block;font-size:12px;margin-bottom:6px;color:rgba(32,31,29,0.7)">Nombre completo</label>
+          <input required="" type="text" placeholder="Nombre apellido" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;margin-bottom:6px;color:rgba(32,31,29,0.7)">Correo electrónico</label>
+          <input required="" type="email" placeholder="tu@correo.com" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <label style="display:block;font-size:12px;margin-bottom:6px;color:rgba(32,31,29,0.7)">Teléfono</label>
+          <input type="tel" placeholder="+52 81 0000 0000" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
+        </div>
+        <div>
+          <label style="display:block;font-size:12px;margin-bottom:6px;color:rgba(32,31,29,0.7)">Fecha estimada del evento</label>
+          <input type="date" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
+        </div>
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;margin-bottom:6px;color:rgba(32,31,29,0.7)">Número de invitados</label>
+        <input type="number" min="0" placeholder="80" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;margin-bottom:8px;color:rgba(32,31,29,0.7)">Motivo de contacto</label>
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:14px">
+          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="motivo" defaultChecked="{{ true }}">Hospedaje</label>
+          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="motivo">Bodas</label>
+          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="motivo">Eventos sociales</label>
+          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="motivo">Eventos empresariales</label>
+        </div>
+      </div>
+      <div>
+        <label style="display:block;font-size:12px;margin-bottom:6px;color:rgba(32,31,29,0.7)">Mensaje</label>
+        <textarea placeholder="Cuéntanos sobre la boda que imaginas" style="width:100%;box-sizing:border-box;min-height:80px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px;resize:vertical" style-focus="border-color:#b68235"></textarea>
+      </div>
+      <button type="submit" style="display: inline-flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 15px; color: #ffffff; border: 1px solid #9CBEC2; border-radius: 4px; padding: 12px 24px; cursor: pointer; background-color: #8DB4B7" style-hover="background:#89AEB4;border-color:#89AEB4">Enviar solicitud</button>
+      </sc-if>
+    </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ESPACIOS -->
+  <section id="espacios" style="padding:96px 56px;border-bottom:1px solid rgba(32,31,29,0.16)">
+    <span style="display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #8DB4B7; margin-bottom: 14px">Espacios para bodas</span>
+    <h2 style="font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 34px; margin: 0 0 44px; max-width: 32ch; color: #000000; white-space: nowrap">Distintas experiencias, una sola celebración</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:28px">
+      <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
+        <image-slot id="space-1" shape="rect" src="assets/jardin-piedra.jpg" placeholder="Jardín de piedra" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Jardín de piedra</h3>
+          <p style="font-size:14px;line-height:1.5;color:rgba(248,244,244,0.88);margin:0">El punto de partida: ceremonia civil rodeada de piedra natural y vegetación nativa.</p>
+        </div>
+      </div>
+      <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
+        <image-slot id="space-2" shape="rect" placeholder="Explanada" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Explanada</h3>
+          <p style="font-size:14px;line-height:1.5;color:rgba(248,244,244,0.88);margin:0">El espacio abierto para la recepción y la fiesta, bajo el cielo de Montemorelos.</p>
+        </div>
+      </div>
+      <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
+        <image-slot id="space-3" shape="rect" placeholder="Jardín de la hacienda" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Terraza de la hacienda</h3>
+          <p style="font-size:14px;line-height:1.5;color:rgba(248,244,244,0.88);margin:0">Los jardines históricos de la hacienda, escenario para el cóctel y la celebración.</p>
+        </div>
+      </div>
+      <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
+        <image-slot id="space-4" shape="rect" placeholder="Laberinto" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Laberinto</h3>
+          <p style="font-size:14px;line-height:1.5;color:rgba(248,244,244,0.88);margin:0">Un laberinto natural pensado para la sesión de fotos de los novios.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAQUETES -->
+  <section id="paquetes" style="position:relative;padding:96px 56px;border-bottom:1px solid rgba(32,31,29,0.16);overflow:hidden;box-shadow:inset 0 30px 40px -18px rgba(0,0,0,0.55),inset 0 -30px 40px -18px rgba(0,0,0,0.55)">
+    <video autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+      <source src="assets/paquetes-bg.mp4" type="video/mp4">
+    </video>
+    <div style="position: absolute; inset: 0; z-index: 1; background-color: #21929015"></div>
+    <div style="position:relative;z-index:2">
+    <img src="assets/ikaan-isotipo-flor.png" alt="" style="display:block;height:32px;margin:0 auto 18px">
+    <span style="display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #8DB4B7; margin-bottom: 14px; text-align: center; text-shadow: 0 2px 10px rgba(0,0,0,0.55)">Paquetes de boda</span>
+    <h2 style="font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 69px; margin: 0 auto 20px; max-width: 32ch; text-align: center; color: #f3f2f2; text-shadow: 0 4px 18px rgba(0,0,0,0.55)">Celebra lo extraordinario en Ikaan</h2>
+    <p style="font-size: 15.5px; line-height: 1.7; color: #ffffff; max-width: 62ch; margin: 0 auto 44px; text-align: center; margin-bottom: 89px; text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 1px 12px rgba(0,0,0,0.7)">Bodas y eventos sociales diseñados a tu medida en un entorno de paz absoluta. Te ofrecemos una solución integral con espacios, banquetes, mobiliario y hospedaje para que disfrutes sin preocupaciones.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px">
+      <div style="display:flex;flex-direction:column;gap:12px;padding:36px;border-radius:20px;background:#ffffff;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
+        <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#b68235">Destino</span>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0">Bodas destino</h3>
+        <p style="font-size:14px;line-height:1.65;color:rgba(32,31,29,0.8);margin:0;flex:1">Para las parejas que traen a sus invitados a vivir un fin de semana completo en la hacienda: hospedaje, ceremonia y celebración en un solo lugar.</p>
+        <a href="#contacto" style="align-self:flex-start;color:#7d5411;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;text-decoration:none;padding-top:4px" style-hover="text-decoration:underline">Solicitar información →</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;padding:36px;border-radius:20px;background:#ffffff;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
+        <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#b68235">Elite</span>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0">Bodas elite</h3>
+        <p style="font-size:14px;line-height:1.65;color:rgba(32,31,29,0.8);margin:0;flex:1">Un servicio integral y personalizado, con atención dedicada a cada detalle de la boda, de principio a fin.</p>
+        <a href="#contacto" style="align-self:flex-start;color:#7d5411;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;text-decoration:none;padding-top:4px" style-hover="text-decoration:underline">Solicitar información →</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;padding:36px;border-radius:20px;background:#ffffff;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
+        <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#b68235">A la medida</span>
+        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0">Renta de espacio específico</h3>
+        <p style="font-size:14px;line-height:1.65;color:rgba(32,31,29,0.8);margin:0;flex:1">Para quienes ya tienen su propio equipo de planeación y solo buscan el escenario: el jardín, la explanada o el salón que mejor se adapte a su boda.</p>
+        <a href="#contacto" style="align-self:flex-start;color:#7d5411;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;text-decoration:none;padding-top:4px" style-hover="text-decoration:underline">Solicitar información →</a>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- HISTORIAS REALES -->
+  <section id="historias" style="padding:96px 56px;border-bottom:1px solid rgba(32,31,29,0.16)">
+    <span style="display:block;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#7d5411;margin-bottom:14px">Historias reales</span>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:34px;margin:0 0 16px;max-width:32ch">Bodas que ya sucedieron en Ikaan</h2>
+    <p style="font-size:15.5px;line-height:1.7;color:rgba(32,31,29,0.78);max-width:56ch;margin:0 0 44px">Video-testimonios de parejas que celebraron su boda en la hacienda.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px">
+      <div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
+        <div style="position:relative">
+          <video id="video-1" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
+            <source src="assets/historia-video-1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p style="font-size:14px;color:rgba(32,31,29,0.78);margin:0;padding:16px 20px 20px">Video de boda — Ikaan Villa Spa</p>
+      </div>
+      <div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
+        <div style="position:relative">
+          <video id="video-2" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
+            <source src="assets/historia-video-2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p style="font-size:14px;color:rgba(32,31,29,0.78);margin:0;padding:16px 20px 20px">Video de boda — Ikaan Villa Spa</p>
+      </div>
+      <div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
+        <div style="position:relative">
+          <video id="video-3" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
+            <source src="assets/historia-video-3.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p style="font-size:14px;color:rgba(32,31,29,0.78);margin:0;padding:16px 20px 20px">Video de boda — Ikaan Villa Spa</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section id="galeria" style="padding: 96px 56px; border-bottom: 1px solid rgba(32,31,29,0.16); background-color: #D9D9D9">
+    <span style="display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #8DB4B7; margin-bottom: 14px">Galería</span>
+    <h2 style="font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 34px; margin: 0 0 44px; max-width: 32ch; color: #000000">La hacienda en imágenes</h2>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:120px;gap:28px">
+      <figure style="margin:0;grid-column:span 3;grid-row:span 3;border-radius:20px;overflow:hidden;box-shadow:0 24px 48px -18px rgba(32,31,29,0.35),0 4px 12px rgba(32,31,29,0.12);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-1" shape="rect" placeholder="Foto de la hacienda" style="width:100%;height:100%"></image-slot></figure>
+      <figure style="margin:0;grid-column:span 3;grid-row:span 2;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(18px);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(12px);box-shadow:0 28px 48px -16px rgba(32,31,29,0.36),0 5px 14px rgba(32,31,29,0.12)"><image-slot id="gallery-2" shape="rect" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+      <figure style="margin:0;grid-column:span 3;grid-row:span 2;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(18px);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(12px);box-shadow:0 28px 48px -16px rgba(32,31,29,0.36),0 5px 14px rgba(32,31,29,0.12)"><image-slot id="gallery-3" shape="rect" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+      <figure style="margin:0;grid-column:span 2;grid-row:span 3;border-radius:20px;overflow:hidden;box-shadow:0 22px 44px -16px rgba(32,31,29,0.32),0 4px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 30px 52px -16px rgba(32,31,29,0.38),0 6px 14px rgba(32,31,29,0.13)"><image-slot id="gallery-4" shape="rect" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+      <figure style="margin:0;grid-column:span 2;grid-row:span 3;border-radius:20px;overflow:hidden;box-shadow:0 22px 44px -16px rgba(32,31,29,0.32),0 4px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 30px 52px -16px rgba(32,31,29,0.38),0 6px 14px rgba(32,31,29,0.13)"><image-slot id="gallery-5" shape="rect" placeholder="Foto de la hacienda" style="width:100%;height:100%"></image-slot></figure>
+      <figure style="margin:0;grid-column:span 2;grid-row:span 3;border-radius:20px;overflow:hidden;box-shadow:0 22px 44px -16px rgba(32,31,29,0.32),0 4px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 30px 52px -16px rgba(32,31,29,0.38),0 6px 14px rgba(32,31,29,0.13)"><image-slot id="gallery-6" shape="rect" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+    </div>
+  </section>
+
+  <!-- UBICACION -->
+  <section id="ubicacion" style="padding:96px 56px;border-bottom:1px solid rgba(32,31,29,0.16);display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,520px);gap:64px;align-items:center">
+    <div>
+      <span style="display:block;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#7d5411;margin-bottom:14px">Ubicación</span>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:32px;margin:0 0 16px;max-width:26ch">Ikaan Villa Spa, Montemorelos, Nuevo León</h2>
+      <p style="font-size:15.5px;line-height:1.7;color:rgba(32,31,29,0.78);max-width:46ch;margin:0 0 28px">Rodeados de naturaleza, a poca distancia del área metropolitana de Monterrey.</p>
+      <a href="#" style="display:inline-flex;align-items:center;color:#b68235;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;border:1px solid #b68235;border-radius:4px;padding:12px 22px;text-decoration:none" style-hover="background:rgba(182,130,53,0.12)">Cómo llegar</a>
+    </div>
+    <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05)">
+      <image-slot id="map-img" shape="rect" src="assets/ikaan-mapa.png" placeholder="Captura de Google Maps — ubicación de Ikaan" style="width:100%;aspect-ratio:16/9"></image-slot>
+    </figure>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="padding: 88px 56px 40px; background-color: #8DB4B7">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
+      <img src="assets/ikaan-isotipo-flor.png" alt="" style="height: 74px; margin-bottom: 40px; opacity: 0.9; width: 72px; margin-top: -51px">
+      <div style="display:flex;justify-content:center;gap:64px;flex-wrap:wrap;padding-bottom:44px">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; font-size: 13.5px; text-align: left">
+          <span style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;letter-spacing:0.08em;text-transform:uppercase;color:#7d5411;margin-bottom:8px">Contacto</span>
+          <a href="{{ whatsappHref }}" target="_blank" rel="noopener" style="font-size: 17px; color: rgba(32,31,29,0.72); text-decoration: none; transition: color .2s; padding-right: 137px" style-hover="color:#7d5411">WhatsApp</a>
+          <span style="font-size:17px;color:rgba(32,31,29,0.72)">Montemorelos, Nuevo León</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;font-size:13.5px">
+          <span style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;letter-spacing:0.08em;text-transform:uppercase;color:#7d5411;margin-bottom:8px">Síguenos</span>
+          <a href="{{ instagramHref }}" target="_blank" rel="noopener" style="font-size: 17px; color: rgba(32,31,29,0.72); text-decoration: none; transition: color .2s; padding-right: 19px" style-hover="color:#7d5411">Instagram</a>
+          <a href="#" style="font-size: 17px; color: rgba(32,31,29,0.72); text-decoration: none; transition: color .2s; padding-right: 25px" style-hover="color:#7d5411">Facebook</a>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;font-size:13.5px">
+          <span style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;letter-spacing:0.08em;text-transform:uppercase;color:#7d5411;margin-bottom:8px">Bodas</span>
+          <a href="#espacios" style="font-size: 17px; color: rgba(32,31,29,0.72); text-decoration: none; transition: color .2s; padding-right: 0px" style-hover="color:#7d5411">Espacios</a>
+          <a href="#paquetes" style="font-size: 17px; color: rgba(32,31,29,0.72); text-decoration: none; transition: color .2s; padding-right: 0px" style-hover="color:#7d5411">Paquetes</a>
+          <a href="#galeria" style="font-size: 17px; color: rgba(32,31,29,0.72); text-decoration: none; transition: color .2s; padding-right: 15px" style-hover="color:#7d5411">Galería</a>
+        </div>
+      </div>
+      <div style="height:1px;width:100%;max-width:520px;background:rgba(32,31,29,0.18);margin-bottom:36px"></div>
+      <img src="assets/ikaan-logo-full.png" alt="ikaan villa spa" style="height: 121px; margin-bottom: -7px; filter: brightness(0) invert(1); margin-top: -48px; width: 370px">
+      <p style="font-size:11.5px;letter-spacing:0.04em;color:rgba(32,31,29,0.55);margin:0">© 2026 Ikaan Villa Spa. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;whatsappPhone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+528111234567&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;},&quot;whatsappMessage&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Hola, me gustaría más información sobre bodas en Ikaan Villa Spa.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;},&quot;instagramHandle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ikaanvillaspa&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;}}">
+class Component extends DCLogic {
+  state = { submitted: false, menuOpen: false, contactOpen: false, formExpanded: false, contactVisible: false };
+  sectionRef = React.createRef();
+
+  toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
+
+  toggleContact = () => {
+    clearTimeout(this._stageTimer);
+    if (!this.state.contactOpen) {
+      this.setState({ contactOpen: true });
+      this._stageTimer = setTimeout(() => this.setState({ formExpanded: true }), 450);
+    } else {
+      this.setState({ formExpanded: false });
+      this._stageTimer = setTimeout(() => this.setState({ contactOpen: false }), 300);
+    }
+  };
+
+  componentDidMount() {
+    this._onScroll = () => {
+      const el = this.sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (rect.bottom < window.innerHeight * 0.15 && (this.state.contactOpen || this.state.formExpanded)) {
+        clearTimeout(this._stageTimer);
+        this.setState({ contactOpen: false, formExpanded: false });
+      }
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+
+    this._observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        this.setState({ contactVisible: true });
+        this._observer.disconnect();
+      }
+    }, { threshold: 0.1 });
+    if (this.sectionRef.current) this._observer.observe(this.sectionRef.current);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    clearTimeout(this._stageTimer);
+    if (this._observer) this._observer.disconnect();
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ submitted: true });
+  };
+
+  renderVals() {
+    const phone = (this.props.whatsappPhone ?? '+528111234567').replace(/[^\d]/g, '');
+    const message = this.props.whatsappMessage ?? 'Hola, me gustaría más información sobre bodas en Ikaan Villa Spa.';
+    const insta = this.props.instagramHandle ?? 'ikaanvillaspa';
+    return {
+      submitted: this.state.submitted,
+      notSubmitted: !this.state.submitted,
+      handleSubmit: this.handleSubmit,
+      menuOpen: this.state.menuOpen,
+      toggleMenu: this.toggleMenu,
+      contactOpen: this.state.contactOpen,
+      contactClosed: !this.state.contactOpen,
+      toggleContact: this.toggleContact,
+      sectionRef: this.sectionRef,
+      contactToggleLabel: this.state.contactOpen ? 'Ocultar formulario' : 'Contáctanos',
+      contactIcon: this.state.contactOpen ? '−' : '+',
+      textWidth: this.state.contactOpen ? 'calc(100% - 508px)' : '100%',
+      textTransitionStyle: 'width 0.9s cubic-bezier(0.65,0,0.35,1)',
+      contactFadeOpacity: this.state.contactVisible ? 1 : 0,
+      contactFadeTransform: this.state.contactVisible ? 'translateY(0)' : 'translateY(24px)',
+      textAlign: this.state.contactOpen ? 'left' : 'center',
+      textItemsAlign: this.state.contactOpen ? 'flex-start' : 'center',
+      formOuterWidth: this.state.contactOpen ? '460px' : '0px',
+      formMarginLeft: this.state.contactOpen ? '48px' : '0px',
+      formOpacity: this.state.contactOpen ? 1 : 0,
+      formTransform: this.state.contactOpen ? 'translateX(0)' : 'translateX(60px)',
+      innerMaxHeight: this.state.formExpanded ? '1200px' : '0px',
+      innerOpacity: this.state.formExpanded ? 1 : 0,
+      whatsappHref: `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+      instagramHref: `https://instagram.com/${insta}`,
+    };
+  }
+}
+</script>
+</body>
+</html>
