@@ -186,7 +186,7 @@ img,video{max-width:100%}
   <div style="max-width:1100px;margin:0 auto;border-radius:28px;overflow:hidden;position:relative;background-color:#eae7e7;box-shadow:0 30px 60px -20px rgba(32,31,29,0.35),0 8px 20px rgba(32,31,29,0.12);transition:transform .4s ease,box-shadow .4s ease" style-hover="transform:translateY(-8px);box-shadow:0 40px 72px -18px rgba(32,31,29,0.42),0 10px 24px rgba(32,31,29,0.15)">
     <div style="position:absolute;inset:0;background:linear-gradient(120deg,#ffffff 0%,#cfe6e8 25%,#ffffff 50%,#9CBEC2 75%,#ffffff 100%);background-size:300% 300%;opacity:0.55;animation:contactoGradientMove 18s ease-in-out infinite;pointer-events:none"></div>
     <div style="display:flex;align-items:center;position:relative;padding:48px;gap:8px">
-      <div style="width:{{ textWidth }};transition:{{ textTransitionStyle }},opacity 1s ease,transform 1s ease;opacity:{{ contactFadeOpacity }};transform:{{ contactFadeTransform }};display:flex;flex-direction:column;align-items:{{ textItemsAlign }};text-align:{{ textAlign }}">
+      <div style="width:{{ textWidth }};opacity:{{ contactFadeOpacity }};transform:{{ contactFadeTransform }};display:flex;flex-direction:column;align-items:{{ textItemsAlign }};text-align:{{ textAlign }}">
         <span style="display:block;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#79706B;margin-bottom:14px">Contacto</span>
         <h2 style="font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 50px; line-height: 1.08; margin: 0 0 20px; max-width: 16ch">Cuéntanos la boda de tus sueños</h2>
         <p style="font-size: 12px; line-height: 1.7; color: rgba(32,31,29,0.78); max-width: 46ch; margin: 0 0 32px">Nosotros te acompañaremos a materializar cada detalle para tu día especial.</p>
@@ -196,9 +196,9 @@ img,video{max-width:100%}
           <p>Ikaan Villa Spa · Montemorelos, Nuevo León<br>Respondemos en menos de 24 horas.</p>
         </div>
       </div>
-      <div style="width:{{ formOuterWidth }};margin-left:{{ formMarginLeft }};opacity:{{ formOpacity }};transform:{{ formTransform }};transition:width 0.9s cubic-bezier(0.65,0,0.35,1),margin-left 0.9s cubic-bezier(0.65,0,0.35,1),opacity 0.7s ease 0.15s,transform 0.9s cubic-bezier(0.65,0,0.35,1);flex-shrink:0;overflow:hidden">
+      <div style="width:{{ formOuterWidth }};margin-left:{{ formMarginLeft }};opacity:{{ formOpacity }};transform:{{ formTransform }};flex-shrink:0;overflow:hidden">
         <div style="width:460px;background:#ffffff;border-radius:20px;box-shadow:0 24px 48px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);overflow:hidden">
-    <form onSubmit="{{ handleSubmit }}" style="max-height:{{ innerMaxHeight }};opacity:{{ innerOpacity }};overflow:hidden;transition:max-height 0.8s cubic-bezier(0.65,0,0.35,1),opacity 0.7s ease;padding:36px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px">
+    <form onSubmit="{{ handleSubmit }}" style="max-height:{{ innerMaxHeight }};opacity:{{ innerOpacity }};overflow:hidden;padding:36px;box-sizing:border-box;display:flex;flex-direction:column;gap:18px">
       <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
         <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:#7d5411;padding:20px 0">Gracias — hemos recibido tu solicitud. Te contactaremos pronto.</div>
       </sc-if>
@@ -416,32 +416,10 @@ img,video{max-width:100%}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;whatsappPhone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+528111234567&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;},&quot;whatsappMessage&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Hola, me gustaría más información sobre bodas en Ikaan Villa Spa.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;},&quot;instagramHandle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ikaanvillaspa&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;}}">
 class Component extends DCLogic {
-  state = { submitted: false, menuOpen: false, contactOpen: false, formExpanded: false, contactVisible: false };
+  state = { submitted: false, menuOpen: false, contactOpen: true, formExpanded: true, contactVisible: true };
   sectionRef = React.createRef();
 
   toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
-
-  openContact = () => {
-    clearTimeout(this._stageTimer);
-    this.setState({ contactOpen: true });
-    this._stageTimer = setTimeout(() => this.setState({ formExpanded: true }), 450);
-  };
-
-  componentDidMount() {
-    this._observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        this.setState({ contactVisible: true });
-        this.openContact();
-        this._observer.disconnect();
-      }
-    }, { threshold: 0.1 });
-    if (this.sectionRef.current) this._observer.observe(this.sectionRef.current);
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this._stageTimer);
-    if (this._observer) this._observer.disconnect();
-  }
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -462,7 +440,6 @@ class Component extends DCLogic {
       contactClosed: !this.state.contactOpen,
       sectionRef: this.sectionRef,
       textWidth: this.state.contactOpen ? 'calc(100% - 508px)' : '100%',
-      textTransitionStyle: 'width 0.9s cubic-bezier(0.65,0,0.35,1)',
       contactFadeOpacity: this.state.contactVisible ? 1 : 0,
       contactFadeTransform: this.state.contactVisible ? 'translateY(0)' : 'translateY(24px)',
       textAlign: this.state.contactOpen ? 'left' : 'center',
