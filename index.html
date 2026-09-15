@@ -327,7 +327,7 @@ img,video{max-width:100%}
   <section id="historias" style="padding:96px 56px;border-bottom:1px solid rgba(32,31,29,0.16)">
     <span style="display:block;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#7d5411;margin-bottom:14px">Historias reales</span>
     <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:34px;margin:0 0 16px;max-width:32ch">Bodas que ya sucedieron en Ikaan</h2>
-    <p style="font-size:15.5px;line-height:1.7;color:rgba(32,31,29,0.78);max-width:56ch;margin:0 0 44px">Video-testimonios de parejas que celebraron su boda en la hacienda.</p>
+    <p style="font-size:15.5px;line-height:1.7;color:rgba(32,31,29,0.78);max-width:56ch;margin:0 0 44px">Video-testimonios de parejas que celebraron su boda con nosotros.</p>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px">
       <div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
         <div style="position:relative">
@@ -416,7 +416,7 @@ img,video{max-width:100%}
 </div>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;whatsappPhone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+528111234567&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;},&quot;whatsappMessage&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Hola, me gustaría más información sobre bodas en Ikaan Villa Spa.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;},&quot;instagramHandle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ikaanvillaspa&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;whatsappPhone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+528116909009&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;},&quot;whatsappMessage&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Hola, me gustaría más información sobre bodas en Ikaan Villa Spa.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;},&quot;instagramHandle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ikaanvillaspa&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;}}">
 class Component extends DCLogic {
   state = { submitted: false, menuOpen: false, contactOpen: true, formExpanded: true, contactVisible: true };
   sectionRef = React.createRef();
@@ -429,7 +429,7 @@ class Component extends DCLogic {
   };
 
   renderVals() {
-    const phone = (this.props.whatsappPhone ?? '+528111234567').replace(/[^\d]/g, '');
+    const phone = (this.props.whatsappPhone ?? '+528116909009').replace(/[^\d]/g, '');
     const message = this.props.whatsappMessage ?? 'Hola, me gustaría más información sobre bodas en Ikaan Villa Spa.';
     const insta = this.props.instagramHandle ?? 'ikaanvillaspa';
     return {
