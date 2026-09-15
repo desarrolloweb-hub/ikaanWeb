@@ -331,7 +331,7 @@ img,video{max-width:100%}
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px">
       <div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
         <div style="position:relative">
-          <video id="video-1" preload="none" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
+          <video id="video-1" preload="none" poster="assets/poster-historia-1.webp" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
             <source src="assets/historia-video-1.mp4" type="video/mp4">
           </video>
         </div>
@@ -339,7 +339,7 @@ img,video{max-width:100%}
       </div>
       <div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
         <div style="position:relative">
-          <video id="video-2" preload="none" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
+          <video id="video-2" preload="none" poster="assets/poster-historia-2.webp" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
             <source src="assets/historia-video-2.mp4" type="video/mp4">
           </video>
         </div>
@@ -347,7 +347,7 @@ img,video{max-width:100%}
       </div>
       <div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
         <div style="position:relative">
-          <video id="video-3" preload="none" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
+          <video id="video-3" preload="none" poster="assets/poster-historia-3.webp" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
             <source src="assets/historia-video-3.mp4" type="video/mp4">
           </video>
         </div>
@@ -361,9 +361,9 @@ img,video{max-width:100%}
     <span style="display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #8DB4B7; margin-bottom: 14px">Galería</span>
     <h2 style="font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 34px; margin: 0 0 44px; max-width: 32ch; color: #000000">La hacienda en imágenes</h2>
     <div style="display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:120px;gap:28px">
-      <figure style="margin:0;grid-column:span 3;grid-row:span 3;border-radius:20px;overflow:hidden;box-shadow:0 24px 48px -18px rgba(32,31,29,0.35),0 4px 12px rgba(32,31,29,0.12);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-1" shape="rect" placeholder="Foto de la hacienda" style="width:100%;height:100%"></image-slot></figure>
-      <figure style="margin:0;grid-column:span 3;grid-row:span 2;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(18px);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(12px);box-shadow:0 28px 48px -16px rgba(32,31,29,0.36),0 5px 14px rgba(32,31,29,0.12)"><image-slot id="gallery-2" shape="rect" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
-      <figure style="margin:0;grid-column:span 3;grid-row:span 2;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(18px);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(12px);box-shadow:0 28px 48px -16px rgba(32,31,29,0.36),0 5px 14px rgba(32,31,29,0.12)"><image-slot id="gallery-3" shape="rect" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+      <figure style="margin:0;grid-column:span 3;grid-row:span 3;border-radius:20px;overflow:hidden;box-shadow:0 24px 48px -18px rgba(32,31,29,0.35),0 4px 12px rgba(32,31,29,0.12);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-1" shape="rect" src="assets/galeria-ceremonia-laberinto.webp" placeholder="Foto de la hacienda" alt="Ceremonia montada en el laberinto de Ikaan" style="width:100%;height:100%"></image-slot></figure>
+      <figure style="margin:0;grid-column:span 3;grid-row:span 2;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(18px);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(12px);box-shadow:0 28px 48px -16px rgba(32,31,29,0.36),0 5px 14px rgba(32,31,29,0.12)"><image-slot id="gallery-2" shape="rect" src="assets/galeria-banquete-jardin.webp" placeholder="Foto de boda" alt="Banquete montado en el jardín" style="width:100%;height:100%"></image-slot></figure>
+      <figure style="margin:0;grid-column:span 3;grid-row:span 2;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(18px);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(12px);box-shadow:0 28px 48px -16px rgba(32,31,29,0.36),0 5px 14px rgba(32,31,29,0.12)"><image-slot id="gallery-3" shape="rect" src="assets/galeria-centro-mesa.webp" placeholder="Foto de boda" alt="Centro de mesa floral" style="width:100%;height:100%"></image-slot></figure>
       <figure style="margin:0;grid-column:span 2;grid-row:span 3;border-radius:20px;overflow:hidden;box-shadow:0 22px 44px -16px rgba(32,31,29,0.32),0 4px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 30px 52px -16px rgba(32,31,29,0.38),0 6px 14px rgba(32,31,29,0.13)"><image-slot id="gallery-4" shape="rect" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
       <figure style="margin:0;grid-column:span 2;grid-row:span 3;border-radius:20px;overflow:hidden;box-shadow:0 22px 44px -16px rgba(32,31,29,0.32),0 4px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 30px 52px -16px rgba(32,31,29,0.38),0 6px 14px rgba(32,31,29,0.13)"><image-slot id="gallery-5" shape="rect" placeholder="Foto de la hacienda" style="width:100%;height:100%"></image-slot></figure>
       <figure style="margin:0;grid-column:span 2;grid-row:span 3;border-radius:20px;overflow:hidden;box-shadow:0 22px 44px -16px rgba(32,31,29,0.32),0 4px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 30px 52px -16px rgba(32,31,29,0.38),0 6px 14px rgba(32,31,29,0.13)"><image-slot id="gallery-6" shape="rect" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
