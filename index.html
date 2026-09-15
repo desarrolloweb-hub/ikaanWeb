@@ -15,17 +15,121 @@
 </template>
 <helmet>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Lora:wght@400;600&display=swap">
+<link rel="preload" as="video" href="assets/hero-bodas.mp4" type="video/mp4">
 <title>Bodas en Ikaan Villa Spa</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Lora:wght@400;600&display=swap');
 html{scroll-behavior:smooth}
 body{margin:0;font-family:'Lora',serif;background:#f3f2f2;color:#201f1d;text-wrap:pretty}
 @keyframes contactoGradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+*,*::before,*::after{box-sizing:border-box}
+/* ---------- COLUMNA DE TEXTO (izquierda) ---------- */
+/* El parrafo a 12px quedaba perdido frente al titular de 50px */
+#contacto h2{font-size:clamp(34px,3.4vw,50px)!important;max-width:14ch!important;margin-bottom:24px!important}
+#contacto section > div p,
+#contacto p[style*="max-width: 46ch"]{
+  font-size:16.5px!important;line-height:1.75!important;max-width:34ch!important;
+  color:rgba(32,31,29,0.72)!important;margin-bottom:28px!important
+}
+/* Filete dorado + datos de contacto para cerrar la columna */
+#contacto .ik-aside{
+  display:flex;flex-direction:column;gap:14px;padding-top:26px;
+  border-top:1px solid rgba(32,31,29,0.16);width:100%;max-width:34ch
+}
+#contacto .ik-aside span{font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:#79706B;font-weight:600}
+#contacto .ik-aside a{
+  font-family:'Cormorant Garamond',serif;font-size:19px;color:#201f1d;
+  text-decoration:none;border-bottom:1px solid rgba(182,130,53,0.5);
+  align-self:flex-start;padding-bottom:2px;transition:color .2s ease,border-color .2s ease
+}
+#contacto .ik-aside a:hover{color:#7d5411;border-color:#7d5411}
+#contacto .ik-aside p{font-size:14px!important;line-height:1.6!important;color:rgba(32,31,29,0.6)!important;margin:0!important}
+@media (max-width:900px){#contacto .ik-aside{display:none}}
+
+/* ---------- FORMULARIO DE CONTACTO ---------- */
+#contacto form{gap:22px!important;padding:40px 38px!important}
+#contacto label{font-family:'Lora',serif}
+/* Etiquetas: versalitas espaciadas en lugar de gris generico */
+#contacto form > sc-if > div > div > label,
+#contacto form label[style*="margin-bottom"]{
+  font-size:10.5px!important;letter-spacing:0.14em!important;text-transform:uppercase!important;
+  color:#79706B!important;margin-bottom:10px!important;font-weight:600!important
+}
+/* Campos: linea editorial en vez de caja */
+#contacto input:not([type=radio]),
+#contacto textarea{
+  border:0!important;border-bottom:1px solid rgba(32,31,29,0.22)!important;border-radius:0!important;
+  padding:8px 2px!important;font-family:'Cormorant Garamond',serif!important;font-size:19px!important;
+  color:#201f1d!important;background:transparent!important;transition:border-color .25s ease
+}
+#contacto input:not([type=radio]):hover,
+#contacto textarea:hover{border-bottom-color:rgba(32,31,29,0.45)!important}
+#contacto input:not([type=radio]):focus,
+#contacto textarea:focus{outline:none!important;border-bottom-color:#b68235!important;border-bottom-width:1.5px!important}
+#contacto input::placeholder,#contacto textarea::placeholder{color:rgba(32,31,29,0.34);font-style:italic}
+#contacto textarea{min-height:92px!important;resize:none!important;line-height:1.5}
+/* El date nativo hereda la tipografia y oculta el spinner feo */
+#contacto input[type=date]{color:rgba(32,31,29,0.55)!important}
+#contacto input[type=date]:focus,#contacto input[type=date]:valid{color:#201f1d!important}
+#contacto input[type=date]::-webkit-calendar-picker-indicator{opacity:.4;cursor:pointer;transition:opacity .2s}
+#contacto input[type=date]::-webkit-calendar-picker-indicator:hover{opacity:.9}
+#contacto input[type=number]::-webkit-outer-spin-button,
+#contacto input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+/* Motivo de contacto: 2x2 y radios de marca en vez del azul del sistema */
+#contacto form div[style*="flex-direction:column;gap:8px"]{
+  display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important
+}
+#contacto input[type=radio]{
+  appearance:none;-webkit-appearance:none;margin:0;flex-shrink:0;
+  width:15px;height:15px;border-radius:50%;border:1px solid rgba(32,31,29,0.3);
+  background:#fff;cursor:pointer;transition:border-color .2s ease,box-shadow .2s ease
+}
+#contacto input[type=radio]:hover{border-color:#b68235}
+#contacto input[type=radio]:checked{border-color:#b68235;box-shadow:inset 0 0 0 3.5px #b68235}
+#contacto input[type=radio]:focus-visible{outline:2px solid rgba(182,130,53,.5);outline-offset:2px}
+#contacto form label[style*="inline-flex"]{
+  font-family:'Cormorant Garamond',serif!important;font-size:17px!important;
+  color:rgba(32,31,29,0.85);padding:9px 12px;border:1px solid rgba(32,31,29,0.12);
+  border-radius:10px;transition:border-color .2s ease,background .2s ease
+}
+#contacto form label[style*="inline-flex"]:hover{border-color:rgba(182,130,53,0.45);background:rgba(182,130,53,0.04)}
+#contacto form label[style*="inline-flex"]:has(input:checked){border-color:#b68235;background:rgba(182,130,53,0.08)}
+/* Boton: teal profundo para que el texto blanco tenga contraste real */
+#contacto button[type=submit]{
+  width:100%;margin-top:6px;background-color:#4F7E82!important;border-color:#4F7E82!important;
+  border-radius:6px!important;padding:16px 24px!important;font-size:15px!important;
+  letter-spacing:0.08em!important;text-transform:uppercase!important;
+  transition:background-color .25s ease,transform .2s ease,box-shadow .25s ease;
+  box-shadow:0 8px 20px -10px rgba(32,31,29,0.5)
+}
+#contacto button[type=submit]:hover{
+  background-color:#3F696D!important;border-color:#3F696D!important;
+  transform:translateY(-1px);box-shadow:0 12px 26px -10px rgba(32,31,29,0.55)
+}
+#contacto button[type=submit]:active{transform:translateY(0)}
+@media (max-width:640px){
+  #contacto form{padding:28px 22px!important}
+  #contacto form div[style*="flex-direction:column;gap:8px"]{grid-template-columns:1fr!important}
+}
+img,video{max-width:100%}
+/* --- Responsive: el diseno original usa paddings y grids fijos en estilos inline --- */
+@media (max-width:1024px){
+  section{padding-left:32px!important;padding-right:32px!important}
+  section[id="ubicacion"],section[id="contacto"]{grid-template-columns:1fr!important;gap:40px!important}
+  #galeria>div{grid-template-columns:repeat(2,1fr)!important;grid-auto-rows:180px!important}
+  #galeria figure{grid-column:span 1!important;grid-row:span 1!important;transform:none!important}
+}
+@media (max-width:640px){
+  section{padding-left:20px!important;padding-right:20px!important;padding-top:64px!important;padding-bottom:64px!important}
+  #galeria>div{grid-template-columns:1fr!important;grid-auto-rows:220px!important;gap:16px!important}
+}
 </style>
 <script src="./image-slot.js"></script>
 </helmet>
 
-<div style="max-width:1600px;margin:0 auto;background:#f3f2f2">
+<div style="width:100%;margin:0 auto;background:#f3f2f2;overflow-x:hidden">
 
   <!-- NAV -->
   <nav style="position: absolute; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 56px; background: transparent">
@@ -81,11 +185,16 @@ body{margin:0;font-family:'Lora',serif;background:#f3f2f2;color:#201f1d;text-wra
   <section id="contacto" ref="{{ sectionRef }}" style="padding:96px 56px;border-bottom:1px solid rgba(32,31,29,0.16);background-color:#f3f2f2">
   <div style="max-width:1100px;margin:0 auto;border-radius:28px;overflow:hidden;position:relative;background-color:#eae7e7;box-shadow:0 30px 60px -20px rgba(32,31,29,0.35),0 8px 20px rgba(32,31,29,0.12);transition:transform .4s ease,box-shadow .4s ease" style-hover="transform:translateY(-8px);box-shadow:0 40px 72px -18px rgba(32,31,29,0.42),0 10px 24px rgba(32,31,29,0.15)">
     <div style="position:absolute;inset:0;background:linear-gradient(120deg,#ffffff 0%,#cfe6e8 25%,#ffffff 50%,#9CBEC2 75%,#ffffff 100%);background-size:300% 300%;opacity:0.55;animation:contactoGradientMove 18s ease-in-out infinite;pointer-events:none"></div>
-    <div style="display:flex;align-items:flex-start;position:relative;padding:48px">
+    <div style="display:flex;align-items:center;position:relative;padding:48px;gap:8px">
       <div style="width:{{ textWidth }};transition:{{ textTransitionStyle }},opacity 1s ease,transform 1s ease;opacity:{{ contactFadeOpacity }};transform:{{ contactFadeTransform }};display:flex;flex-direction:column;align-items:{{ textItemsAlign }};text-align:{{ textAlign }}">
         <span style="display:block;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:#79706B;margin-bottom:14px">Contacto</span>
         <h2 style="font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 50px; line-height: 1.08; margin: 0 0 20px; max-width: 16ch">Cuéntanos la boda de tus sueños</h2>
         <p style="font-size: 12px; line-height: 1.7; color: rgba(32,31,29,0.78); max-width: 46ch; margin: 0 0 32px">Nosotros te acompañaremos a materializar cada detalle para tu día especial.</p>
+        <div class="ik-aside">
+          <span>Escríbenos directo</span>
+          <a href="{{ whatsappHref }}" target="_blank" rel="noopener">WhatsApp</a>
+          <p>Ikaan Villa Spa · Montemorelos, Nuevo León<br>Respondemos en menos de 24 horas.</p>
+        </div>
       </div>
       <div style="width:{{ formOuterWidth }};margin-left:{{ formMarginLeft }};opacity:{{ formOpacity }};transform:{{ formTransform }};transition:width 0.9s cubic-bezier(0.65,0,0.35,1),margin-left 0.9s cubic-bezier(0.65,0,0.35,1),opacity 0.7s ease 0.15s,transform 0.9s cubic-bezier(0.65,0,0.35,1);flex-shrink:0;overflow:hidden">
         <div style="width:460px;background:#ffffff;border-radius:20px;box-shadow:0 24px 48px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);overflow:hidden">
@@ -146,10 +255,10 @@ body{margin:0;font-family:'Lora',serif;background:#f3f2f2;color:#201f1d;text-wra
     <h2 style="font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 34px; margin: 0 0 44px; max-width: 32ch; color: #000000; white-space: nowrap">Distintas experiencias, una sola celebración</h2>
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:28px">
       <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
-        <image-slot id="space-1" shape="rect" src="assets/jardin-piedra.jpg" placeholder="Jardín de piedra" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <image-slot id="space-1" shape="rect" src="assets/jardin-piedra.webp" placeholder="Plaza de piedra" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
         <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
-          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Jardín de piedra</h3>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Plaza de piedra</h3>
           <p style="font-size:14px;line-height:1.5;color:rgba(248,244,244,0.88);margin:0">El punto de partida: ceremonia civil rodeada de piedra natural y vegetación nativa.</p>
         </div>
       </div>
@@ -162,7 +271,7 @@ body{margin:0;font-family:'Lora',serif;background:#f3f2f2;color:#201f1d;text-wra
         </div>
       </div>
       <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
-        <image-slot id="space-3" shape="rect" src="assets/terraza.jpg" placeholder="Terraza de la hacienda" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <image-slot id="space-3" shape="rect" src="assets/terraza.webp" placeholder="Terraza de la hacienda" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
         <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Terraza de la hacienda</h3>
@@ -170,7 +279,7 @@ body{margin:0;font-family:'Lora',serif;background:#f3f2f2;color:#201f1d;text-wra
         </div>
       </div>
       <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
-        <image-slot id="space-4" shape="rect" src="assets/laberinto.jpg" placeholder="Laberinto" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <image-slot id="space-4" shape="rect" src="assets/laberinto.webp" placeholder="Laberinto" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
         <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Laberinto</h3>
@@ -182,12 +291,12 @@ body{margin:0;font-family:'Lora',serif;background:#f3f2f2;color:#201f1d;text-wra
 
   <!-- PAQUETES -->
   <section id="paquetes" style="position:relative;padding:96px 56px;border-bottom:1px solid rgba(32,31,29,0.16);overflow:hidden;box-shadow:inset 0 30px 40px -18px rgba(0,0,0,0.55),inset 0 -30px 40px -18px rgba(0,0,0,0.55)">
-    <video autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
+    <video preload="metadata" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
       <source src="assets/paquetes-bg.mp4" type="video/mp4">
     </video>
     <div style="position: absolute; inset: 0; z-index: 1; background-color: #21929015"></div>
     <div style="position:relative;z-index:2">
-    <img src="assets/ikaan-isotipo-flor.png" alt="" style="display:block;height:32px;margin:0 auto 18px">
+    <img src="assets/ikaan-isotipo-flor.png" alt="" loading="lazy" decoding="async" style="display:block;height:32px;margin:0 auto 18px">
     <span style="display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #8DB4B7; margin-bottom: 14px; text-align: center; text-shadow: 0 2px 10px rgba(0,0,0,0.55)">Paquetes de boda</span>
     <h2 style="font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 69px; margin: 0 auto 20px; max-width: 32ch; text-align: center; color: #f3f2f2; text-shadow: 0 4px 18px rgba(0,0,0,0.55)">Celebra lo extraordinario en Ikaan</h2>
     <p style="font-size: 15.5px; line-height: 1.7; color: #ffffff; max-width: 62ch; margin: 0 auto 44px; text-align: center; margin-bottom: 89px; text-shadow: 0 2px 4px rgba(0,0,0,0.9), 0 1px 12px rgba(0,0,0,0.7)">Bodas y eventos sociales diseñados a tu medida en un entorno de paz absoluta. Te ofrecemos una solución integral con espacios, banquetes, mobiliario y hospedaje para que disfrutes sin preocupaciones.</p>
@@ -222,7 +331,7 @@ body{margin:0;font-family:'Lora',serif;background:#f3f2f2;color:#201f1d;text-wra
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px">
       <div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
         <div style="position:relative">
-          <video id="video-1" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
+          <video id="video-1" preload="none" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
             <source src="assets/historia-video-1.mp4" type="video/mp4">
           </video>
         </div>
@@ -230,7 +339,7 @@ body{margin:0;font-family:'Lora',serif;background:#f3f2f2;color:#201f1d;text-wra
       </div>
       <div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
         <div style="position:relative">
-          <video id="video-2" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
+          <video id="video-2" preload="none" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
             <source src="assets/historia-video-2.mp4" type="video/mp4">
           </video>
         </div>
@@ -238,7 +347,7 @@ body{margin:0;font-family:'Lora',serif;background:#f3f2f2;color:#201f1d;text-wra
       </div>
       <div style="background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);box-shadow:0 32px 56px -12px rgba(32,31,29,0.32),0 8px 16px rgba(32,31,29,0.1)">
         <div style="position:relative">
-          <video id="video-3" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
+          <video id="video-3" preload="none" controls="{{ true }}" style="width:100%;aspect-ratio:16/9;display:block;background:#e5e3e2;object-fit:cover">
             <source src="assets/historia-video-3.mp4" type="video/mp4">
           </video>
         </div>
@@ -270,14 +379,14 @@ body{margin:0;font-family:'Lora',serif;background:#f3f2f2;color:#201f1d;text-wra
       <a href="#" style="display:inline-flex;align-items:center;color:#b68235;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;border:1px solid #b68235;border-radius:4px;padding:12px 22px;text-decoration:none" style-hover="background:rgba(182,130,53,0.12)">Cómo llegar</a>
     </div>
     <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05)">
-      <image-slot id="map-img" shape="rect" src="assets/ikaan-mapa.png" placeholder="Captura de Google Maps — ubicación de Ikaan" style="width:100%;aspect-ratio:16/9"></image-slot>
+      <image-slot id="map-img" shape="rect" src="assets/ikaan-mapa.webp" placeholder="Captura de Google Maps — ubicación de Ikaan" style="width:100%;aspect-ratio:16/9"></image-slot>
     </figure>
   </section>
 
   <!-- FOOTER -->
   <footer style="padding: 88px 56px 40px; background-color: #8DB4B7">
     <div style="display:flex;flex-direction:column;align-items:center;text-align:center">
-      <img src="assets/ikaan-isotipo-flor.png" alt="" style="height: 74px; margin-bottom: 40px; opacity: 0.9; width: 72px; margin-top: -51px">
+      <img src="assets/ikaan-isotipo-flor.png" alt="" loading="lazy" decoding="async" style="height: 74px; margin-bottom: 40px; opacity: 0.9; width: 72px; margin-top: -51px">
       <div style="display:flex;justify-content:center;gap:64px;flex-wrap:wrap;padding-bottom:44px">
         <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; font-size: 13.5px; text-align: left">
           <span style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:18px;letter-spacing:0.08em;text-transform:uppercase;color:#7d5411;margin-bottom:8px">Contacto</span>
