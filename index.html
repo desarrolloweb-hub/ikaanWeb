@@ -3,6 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Meta Pixel: mismos IDs que usa https://ikaan.com.mx/empresas/. El evento Lead se dispara en handleSubmit al enviar el formulario.
+     DESACTIVADO TEMPORALMENTE (20 nov 2026): para reactivarlo, borrar las dos lineas de apertura y cierre de comentario que envuelven el script y el noscript.
+     handleSubmit revisa que fbq exista, asi que con el pixel apagado el formulario no truena -->
+<!--
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '724724799366022');
+fbq('init', '240831078224400');
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=724724799366022&amp;ev=PageView&amp;noscript=1">
+<img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=240831078224400&amp;ev=PageView&amp;noscript=1">
+</noscript>
+-->
 <script src="./support.js"></script>
 </head>
 <body>
@@ -177,6 +196,68 @@ img,video{max-width:100%}
   #paquetes{padding-top:96px!important;padding-bottom:32px!important}
   #galeria>div{grid-template-columns:1fr!important;grid-auto-rows:240px!important;gap:16px!important}
 }
+
+/* ---------- CELULAR Y TABLETA (nov 2026) ----------
+   El export trae los layouts de escritorio en estilos inline (rejillas de 2 y 3 columnas,
+   paddings de 56px, titulos de 69px con nowrap) y casi no se adaptaban. Ojo: el navegador
+   serializa el style inline con espacios ("display: grid;"), asi que aqui se usan selectores
+   por estructura y no [style*="..."] */
+@media (max-width:900px){
+  /* Nav: los 5 enlaces se encimaban con el titulo del hero; queda solo la hamburguesa */
+  nav{padding:12px 20px!important}
+  nav>img{height:52px!important}
+  nav>div>a{display:none!important}
+  /* Contacto: texto arriba y formulario abajo, en una sola columna */
+  #contacto>div>div:nth-child(2){flex-direction:column!important;align-items:stretch!important;padding:40px 24px!important;gap:36px!important}
+  #contacto>div>div:nth-child(2)>div{flex:1 1 auto!important;width:100%!important}
+  #contacto form{max-height:none!important}
+  /* Paquetes e historias: una tarjeta por renglon */
+  .ik-paquetes-grid{grid-template-columns:1fr!important;gap:20px!important}
+  #paquetes h2{font-size:clamp(40px,9vw,69px)!important;line-height:1.05!important}
+  #paquetes>div>p{margin-bottom:48px!important}
+  #historias>div{grid-template-columns:1fr!important;gap:24px!important}
+  #espacios h2{white-space:normal!important}
+  footer{padding-left:20px!important;padding-right:20px!important;padding-bottom:104px!important}
+  footer img[alt="ikaan villa spa"]{width:100%!important;max-width:320px!important;height:auto!important;margin-top:0!important}
+}
+@media (max-width:640px){
+  /* Hero: menos padding lateral; svh evita el brinco cuando aparece/desaparece la barra del navegador */
+  nav+section{height:88svh!important;min-height:560px!important;padding:0!important}
+  nav+section>div:last-child{padding:0 20px 56px!important}
+  /* Contacto: la tarjeta ocupa casi todo el ancho */
+  section#contacto{padding-left:12px!important;padding-right:12px!important}
+  #contacto>div{border-radius:24px!important}
+  #contacto>div>div:nth-child(2){padding:36px 16px 20px!important}
+  #contacto>div>div:nth-child(2)>div:first-child{padding:0 8px}
+  #contacto form{padding:28px 20px!important;gap:22px!important}
+  #contacto form>div{grid-template-columns:1fr!important;gap:22px!important}
+  #contacto>div::after{width:240px;height:240px;left:-70px;bottom:-80px}
+  /* Espacios: una columna y foto mas alta para que el texto quepa sobre la imagen */
+  #espacios h2{font-size:28px!important;margin-bottom:28px!important}
+  #espacios>div{grid-template-columns:1fr!important;gap:18px!important}
+  #espacios>div>div>image-slot{aspect-ratio:4/3!important}
+  #espacios>div>div>div:last-child{padding:20px!important}
+  .ik-paquetes-grid>div{padding:28px 24px!important}
+  #historias h2,#ubicacion h2{font-size:28px!important}
+}
+
+/* ---------- RENDIMIENTO EN CELULARES ----------
+   Lo que trababa el scroll en pantallas tactiles:
+   - backdrop-filter en las 3 tarjetas de paquetes: la GPU re-desenfoca el video de fondo en cada cuadro
+   - el degradado animado de la tarjeta de contacto (background-position se repinta en cada cuadro)
+   - style-hover: al tocar, la tarjeta se queda "levantada" con transform y sombra grande */
+@media (hover:none),(max-width:900px){
+  .ik-paquetes-grid>div{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(248,244,244,0.94)!important}
+  nav>div>div>div{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:rgba(255,255,255,0.96)!important}
+  #contacto>div>div:first-child{animation:none!important}
+}
+@media (hover:none){
+  #contacto>div,#espacios>div>div,.ik-paquetes-grid>div,#historias>div>div,#galeria figure{transform:none!important}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  #contacto>div>div:first-child{animation:none!important}
+}
 </style>
 <script src="./image-slot.js"></script>
 </helmet>
@@ -202,10 +283,11 @@ img,video{max-width:100%}
         </button>
         <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
           <div style="position:absolute;top:56px;right:0;background:rgba(255,255,255,0.72);backdrop-filter:blur(10px);border-radius:14px;box-shadow:0 20px 40px -16px rgba(32,31,29,0.25),0 2px 8px rgba(32,31,29,0.08);padding:10px;display:flex;flex-direction:column;min-width:180px;overflow:hidden">
-            <a href="#" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Inicio</a>
-            <a href="#paquetes" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Servicios</a>
-            <a href="#" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Boutique</a>
+            <a href="#espacios" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Espacios</a>
+            <a href="#paquetes" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Paquetes</a>
+            <a href="#historias" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Historias</a>
             <a href="#galeria" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Galería</a>
+            <a href="#ubicacion" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Ubicación</a>
             <a href="#contacto" onClick="{{ toggleMenu }}" style="color:#201f1d;text-decoration:none;font-size:14.5px;padding:10px 16px;border-radius:8px" style-hover="background:rgba(182,130,53,0.1);color:#7d5411">Contacto</a>
           </div>
         </sc-if>
@@ -269,41 +351,51 @@ img,video{max-width:100%}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
         <div>
           <label style="display:block;font-size:12px;margin-bottom:6px;color:rgba(32,31,29,0.7)">Nombre completo</label>
-          <input required="" type="text" placeholder="Nombre apellido" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
+          <input name="nombre" required="" type="text" autoComplete="name" placeholder="Nombre apellido" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
         </div>
         <div>
           <label style="display:block;font-size:12px;margin-bottom:6px;color:rgba(32,31,29,0.7)">Correo electrónico</label>
-          <input required="" type="email" placeholder="tu@correo.com" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
+          <input name="correo" required="" type="email" autoComplete="email" placeholder="tu@correo.com" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
         </div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
         <div>
           <label style="display:block;font-size:12px;margin-bottom:6px;color:rgba(32,31,29,0.7)">Teléfono</label>
-          <input type="tel" placeholder="+52 81 0000 0000" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
+          <input name="telefono" type="tel" autoComplete="tel" placeholder="+52 81 0000 0000" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
         </div>
         <div>
           <label style="display:block;font-size:12px;margin-bottom:6px;color:rgba(32,31,29,0.7)">Fecha estimada del evento</label>
-          <input type="date" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
+          <input name="fecha" type="date" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
         </div>
       </div>
       <div>
         <label style="display:block;font-size:12px;margin-bottom:6px;color:rgba(32,31,29,0.7)">Número de invitados</label>
-        <input type="number" min="0" placeholder="80" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
+        <input name="invitados" type="number" min="0" placeholder="80" style="width:100%;box-sizing:border-box;min-height:38px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px" style-focus="border-color:#b68235">
       </div>
       <div>
         <label style="display:block;font-size:12px;margin-bottom:8px;color:rgba(32,31,29,0.7)">Motivo de contacto</label>
         <div style="display:flex;flex-direction:column;gap:8px;font-size:14px">
-          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="motivo" defaultChecked="{{ true }}">Boda</label>
-          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="motivo">Despedida de soltera</label>
-          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="motivo">Eventos sociales</label>
-          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="motivo">Otro</label>
+          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="motivo" value="Boda" defaultChecked="{{ true }}">Boda</label>
+          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="motivo" value="Despedida de soltera">Despedida de soltera</label>
+          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="motivo" value="Eventos sociales">Eventos sociales</label>
+          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer"><input type="radio" name="motivo" value="Otro">Otro</label>
         </div>
       </div>
       <div>
         <label style="display:block;font-size:12px;margin-bottom:6px;color:rgba(32,31,29,0.7)">Mensaje</label>
-        <textarea placeholder="Cuéntanos sobre la boda que imaginas" style="width:100%;box-sizing:border-box;min-height:80px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px;resize:vertical" style-focus="border-color:#b68235"></textarea>
+        <textarea name="mensaje" placeholder="Cuéntanos sobre la boda que imaginas" style="width:100%;box-sizing:border-box;min-height:80px;padding:8px 12px;font:inherit;font-size:14px;background:transparent;border:1px solid rgba(32,31,29,0.16);border-radius:4px;resize:vertical" style-focus="border-color:#b68235"></textarea>
       </div>
-      <button type="submit" style="display: inline-flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 15px; color: #ffffff; border: 1px solid #9CBEC2; border-radius: 4px; padding: 12px 24px; cursor: pointer; background-color: #8DB4B7" style-hover="background:#89AEB4;border-color:#89AEB4">Enviar solicitud <span style="padding-left:12px">&#8594;</span></button>
+      <!-- Campo trampa anti-spam: oculto para personas; si un bot lo llena, enviar.php descarta el envío -->
+      <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+        <label>No llenar <input name="sitio_web" type="text" tabIndex="-1" autoComplete="off"></label>
+      </div>
+      <sc-if value="{{ sendError }}" hint-placeholder-val="{{ false }}">
+        <p role="alert" style="margin:0;font-size:14px;line-height:1.5;color:#8a2d1c;padding:12px 14px;border:1px solid rgba(138,45,28,0.25);border-radius:4px;background:rgba(138,45,28,0.05)">No pudimos enviar tu solicitud. Intenta de nuevo o escríbenos por <a href="https://wa.me/528126393783" target="_blank" rel="noopener" style="color:inherit;font-weight:600">WhatsApp</a>.</p>
+      </sc-if>
+      <button type="submit" disabled="{{ sending }}" style="display: inline-flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 15px; color: #ffffff; border: 1px solid #9CBEC2; border-radius: 4px; padding: 12px 24px; cursor: {{ submitCursor }}; opacity: {{ submitOpacity }}; background-color: #8DB4B7" style-hover="background:#89AEB4;border-color:#89AEB4">
+        <sc-if value="{{ sending }}" hint-placeholder-val="{{ false }}">Enviando…</sc-if>
+        <sc-if value="{{ notSending }}" hint-placeholder-val="{{ true }}">Enviar solicitud <span style="padding-left:12px">&#8594;</span></sc-if>
+      </button>
       </sc-if>
     </form>
         </div>
@@ -318,7 +410,7 @@ img,video{max-width:100%}
     <h2 style="font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 34px; margin: 0 0 44px; max-width: 32ch; color: #000000; white-space: nowrap">Distintas experiencias, una sola celebración</h2>
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:28px">
       <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);background:rgba(248,244,244,0.82);box-shadow:0 32px 56px -12px rgba(32,31,29,0.42),0 8px 16px rgba(32,31,29,0.14)">
-        <image-slot id="space-2" shape="rect" src="assets/explanada-carpas-noche.webp" alt="Vista aérea nocturna de la explanada con las carpas iluminadas" placeholder="Explanada" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <image-slot id="space-2" shape="rect" data-src="assets/explanada-carpas-noche.webp" alt="Vista aérea nocturna de la explanada con las carpas iluminadas" placeholder="Explanada" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
         <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Explanada</h3>
@@ -326,7 +418,7 @@ img,video{max-width:100%}
         </div>
       </div>
       <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);background:rgba(248,244,244,0.82);box-shadow:0 32px 56px -12px rgba(32,31,29,0.42),0 8px 16px rgba(32,31,29,0.14)">
-        <image-slot id="space-3" shape="rect" src="assets/hacienda-terraza-noche.webp" alt="Banquete nocturno en la terraza empedrada de la hacienda" placeholder="Hacienda" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <image-slot id="space-3" shape="rect" data-src="assets/hacienda-terraza-noche.webp" alt="Banquete nocturno en la terraza empedrada de la hacienda" placeholder="Hacienda" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
         <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Hacienda</h3>
@@ -334,7 +426,7 @@ img,video{max-width:100%}
         </div>
       </div>
       <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);background:rgba(248,244,244,0.82);box-shadow:0 32px 56px -12px rgba(32,31,29,0.42),0 8px 16px rgba(32,31,29,0.14)">
-        <image-slot id="space-1" shape="rect" src="assets/plaza-piedra-ceremonia.webp" alt="Ceremonia en la plaza de piedra bajo el árbol" placeholder="Plaza de piedra" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <image-slot id="space-1" shape="rect" data-src="assets/plaza-piedra-ceremonia.webp" alt="Ceremonia en la plaza de piedra bajo el árbol" placeholder="Plaza de piedra" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
         <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Plaza de piedra</h3>
@@ -342,7 +434,7 @@ img,video{max-width:100%}
         </div>
       </div>
       <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);background:rgba(248,244,244,0.82);box-shadow:0 32px 56px -12px rgba(32,31,29,0.42),0 8px 16px rgba(32,31,29,0.14)">
-        <image-slot id="space-4" shape="rect" src="assets/laberinto.webp" placeholder="Laberinto" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <image-slot id="space-4" shape="rect" data-src="assets/laberinto.webp" placeholder="Laberinto" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
         <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Laberinto</h3>
@@ -350,7 +442,7 @@ img,video{max-width:100%}
         </div>
       </div>
       <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);background:rgba(248,244,244,0.82);box-shadow:0 32px 56px -12px rgba(32,31,29,0.42),0 8px 16px rgba(32,31,29,0.14)">
-        <image-slot id="space-5" shape="rect" src="assets/galeria-sesion-lavanda.webp" alt="Sesión fotográfica de la novia en el campo de flores" placeholder="Sesión fotográfica" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <image-slot id="space-5" shape="rect" data-src="assets/galeria-sesion-lavanda.webp" alt="Sesión fotográfica de la novia en el campo de flores" placeholder="Sesión fotográfica" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
         <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Sesión fotográfica</h3>
@@ -358,7 +450,7 @@ img,video{max-width:100%}
         </div>
       </div>
       <div style="position:relative;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05);transition:transform 0.25s ease,box-shadow 0.25s ease" style-hover="transform:translateY(-8px);background:rgba(248,244,244,0.82);box-shadow:0 32px 56px -12px rgba(32,31,29,0.42),0 8px 16px rgba(32,31,29,0.14)">
-        <image-slot id="space-6" shape="rect" src="assets/galeria-novios-bosque.webp" alt="Pareja abrazada en el sendero del bosque" placeholder="Entrega de anillo" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
+        <image-slot id="space-6" shape="rect" data-src="assets/galeria-novios-bosque.webp" alt="Pareja abrazada en el sendero del bosque" placeholder="Entrega de anillo" style="width:100%;aspect-ratio:16/9;display:block"></image-slot>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,31,29,0) 45%,rgba(32,31,29,0.75) 100%);pointer-events:none"></div>
         <div style="position:absolute;left:0;right:0;bottom:0;padding:24px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0 0 6px;color:#f8f4f4">Entrega de anillo</h3>
@@ -440,17 +532,17 @@ img,video{max-width:100%}
     <span style="display: block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #8DB4B7; margin-bottom: 14px">Galería</span>
     <h2 style="font-family: 'Cormorant Garamond',serif; font-weight: 600; font-size: 34px; margin: 0 0 44px; max-width: 32ch; color: #000000">Bodas en Ikaan</h2>
     <div style="display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:120px;gap:28px">
-      <figure style="margin:0;grid-column:span 3;grid-row:span 3;border-radius:20px;overflow:hidden;box-shadow:0 24px 48px -18px rgba(32,31,29,0.35),0 4px 12px rgba(32,31,29,0.12);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-1" shape="rect" src="assets/galeria-ceremonia-laberinto.webp" alt="Ceremonia montada en el laberinto de Ikaan" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+      <figure style="margin:0;grid-column:span 3;grid-row:span 3;border-radius:20px;overflow:hidden;box-shadow:0 24px 48px -18px rgba(32,31,29,0.35),0 4px 12px rgba(32,31,29,0.12);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-1" shape="rect" data-src="assets/galeria-ceremonia-laberinto.webp" alt="Ceremonia montada en el laberinto de Ikaan" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
       <div class="ik-galeria-par" style="grid-column:span 3;grid-row:span 2;display:grid;grid-template-columns:1fr 1fr;gap:28px">
-        <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(18px);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(12px);box-shadow:0 28px 48px -16px rgba(32,31,29,0.36),0 5px 14px rgba(32,31,29,0.12)"><image-slot id="gallery-2a" shape="rect" src="assets/galeria-ceremonia-flores-blancas.webp" alt="Altar de ceremonia bajo el árbol decorado con flores blancas" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
-        <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(18px);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(12px);box-shadow:0 28px 48px -16px rgba(32,31,29,0.36),0 5px 14px rgba(32,31,29,0.12)"><image-slot id="gallery-2b" shape="rect" src="assets/galeria-salida-novios-arroz.webp" alt="Los novios salen de la ceremonia entre lluvia de arroz" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+        <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(18px);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(12px);box-shadow:0 28px 48px -16px rgba(32,31,29,0.36),0 5px 14px rgba(32,31,29,0.12)"><image-slot id="gallery-2a" shape="rect" data-src="assets/galeria-ceremonia-flores-blancas.webp" alt="Altar de ceremonia bajo el árbol decorado con flores blancas" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+        <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(18px);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(12px);box-shadow:0 28px 48px -16px rgba(32,31,29,0.36),0 5px 14px rgba(32,31,29,0.12)"><image-slot id="gallery-2b" shape="rect" data-src="assets/galeria-salida-novios-arroz.webp" alt="Los novios salen de la ceremonia entre lluvia de arroz" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
       </div>
-      <figure style="margin:0;grid-column:span 3;grid-row:span 2;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(18px);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(12px);box-shadow:0 28px 48px -16px rgba(32,31,29,0.36),0 5px 14px rgba(32,31,29,0.12)"><image-slot id="gallery-3" shape="rect" src="assets/galeria-montaje-bosque.webp" alt="Montaje de banquete bajo los árboles con luces colgantes" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+      <figure style="margin:0;grid-column:span 3;grid-row:span 2;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(18px);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(12px);box-shadow:0 28px 48px -16px rgba(32,31,29,0.36),0 5px 14px rgba(32,31,29,0.12)"><image-slot id="gallery-3" shape="rect" data-src="assets/galeria-montaje-bosque.webp" alt="Montaje de banquete bajo los árboles con luces colgantes" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
       <div class="ik-galeria-fila" style="grid-column:span 6;grid-row:span 3;display:grid;grid-template-columns:repeat(4,1fr);gap:28px">
-        <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-4" shape="rect" src="assets/galeria-ceremonia-arbol.webp" alt="Ceremonia bajo el árbol con luces colgantes" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
-        <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-5" shape="rect" src="assets/galeria-novios-bosque.webp" alt="Los novios en el sendero del bosque" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
-        <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-6" shape="rect" src="assets/galeria-sesion-lavanda.webp" alt="Sesión fotográfica de la novia en el campo de flores" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
-        <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-7" shape="rect" src="assets/galeria-novia-sendero-flores.webp" alt="Novia en el sendero de piedra entre flores blancas" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+        <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-4" shape="rect" data-src="assets/galeria-ceremonia-arbol.webp" alt="Ceremonia bajo el árbol con luces colgantes" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+        <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-5" shape="rect" data-src="assets/galeria-novios-bosque.webp" alt="Los novios en el sendero del bosque" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+        <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-6" shape="rect" data-src="assets/galeria-sesion-lavanda.webp" alt="Sesión fotográfica de la novia en el campo de flores" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
+        <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.3),0 3px 10px rgba(32,31,29,0.1);transform:translateY(0);transition:transform .35s ease,box-shadow .35s ease" style-hover="transform:translateY(-6px);box-shadow:0 32px 56px -16px rgba(32,31,29,0.4),0 6px 16px rgba(32,31,29,0.14)"><image-slot id="gallery-7" shape="rect" data-src="assets/galeria-novia-sendero-flores.webp" alt="Novia en el sendero de piedra entre flores blancas" placeholder="Foto de boda" style="width:100%;height:100%"></image-slot></figure>
       </div>
     </div>
   </section>
@@ -464,7 +556,7 @@ img,video{max-width:100%}
       <a href="#" style="display:inline-flex;align-items:center;color:#b68235;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px;border:1px solid #b68235;border-radius:4px;padding:12px 22px;text-decoration:none" style-hover="background:rgba(182,130,53,0.12)">Cómo llegar</a>
     </div>
     <figure style="margin:0;border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -16px rgba(32,31,29,0.16),0 2px 8px rgba(32,31,29,0.05)">
-      <image-slot id="map-img" shape="rect" src="assets/ikaan-mapa.webp" placeholder="Captura de Google Maps — ubicación de Ikaan" style="width:100%;aspect-ratio:16/9"></image-slot>
+      <image-slot id="map-img" shape="rect" data-src="assets/ikaan-mapa.webp" placeholder="Captura de Google Maps — ubicación de Ikaan" style="width:100%;aspect-ratio:16/9"></image-slot>
     </figure>
   </section>
 
@@ -499,19 +591,53 @@ img,video{max-width:100%}
     </div>
   </footer>
 
+  <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+  <a href="https://wa.me/528126393783" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" title="WhatsApp" style="position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));z-index:1000;width:60px;height:60px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,0.25);transition:transform .2s ease,box-shadow .2s ease" style-hover="transform:scale(1.06);box-shadow:0 8px 26px rgba(0,0,0,0.3)">
+    <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true"><path fill="#ffffff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.870 9.870 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.860 9.860 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+  </a>
+
 </div>
 
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;whatsappPhone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+528116909009&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;},&quot;whatsappMessage&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Hola, me gustaría más información sobre bodas en Ikaan Villa Spa.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;},&quot;instagramHandle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ikaanvillaspa&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contacto&quot;}}">
 class Component extends DCLogic {
-  state = { submitted: false, menuOpen: false, contactOpen: true, formExpanded: true, contactVisible: true };
+  state = { submitted: false, menuOpen: false, contactOpen: true, formExpanded: true, contactVisible: true, sending: false, sendError: false };
+  cargadoEn = Date.now();
   sectionRef = React.createRef();
 
   toggleMenu = () => this.setState(s => ({ menuOpen: !s.menuOpen }));
 
+  componentDidMount() {
+    // image-slot no tiene carga diferida propia: descargaba todas las fotos (~4 MB) al abrir la pagina.
+    // Las de espacios, galeria y mapa llevan data-src y reciben su src a ~800px de entrar en pantalla
+    const fotos = document.querySelectorAll("image-slot[data-src]");
+    const cargarFoto = (el) => { el.setAttribute("src", el.dataset.src); el.removeAttribute("data-src"); };
+    if (!("IntersectionObserver" in window)) { fotos.forEach(cargarFoto); return; }
+    this.fotoObserver = new IntersectionObserver((entradas, obs) => {
+      entradas.forEach((e) => { if (e.isIntersecting) { cargarFoto(e.target); obs.unobserve(e.target); } });
+    }, { rootMargin: "800px 0px" });
+    fotos.forEach((el) => this.fotoObserver.observe(el));
+  }
+
+  componentWillUnmount() {
+    if (this.fotoObserver) this.fotoObserver.disconnect();
+  }
+
+  // Envía el formulario a enviar.php (misma carpeta). Solo si el servidor confirma el envío
+  // se muestra el "gracias" y se registra la conversión Lead en Meta Pixel
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({ submitted: true });
+    if (this.state.sending) return;
+    const datos = new FormData(e.currentTarget || e.target);
+    datos.append("_t", String(Date.now() - this.cargadoEn));
+    this.setState({ sending: true, sendError: false });
+    fetch("enviar.php", { method: "POST", body: datos, headers: { Accept: "application/json" } })
+      .then((r) => r.json().catch(() => ({})).then((j) => { if (!r.ok || !j.ok) throw new Error(j.error || String(r.status)); }))
+      .then(() => {
+        if (typeof window.fbq === "function") window.fbq("track", "Lead");
+        this.setState({ submitted: true, sending: false });
+      })
+      .catch(() => this.setState({ sending: false, sendError: true }));
   };
 
   renderVals() {
@@ -522,6 +648,11 @@ class Component extends DCLogic {
       submitted: this.state.submitted,
       notSubmitted: !this.state.submitted,
       handleSubmit: this.handleSubmit,
+      sending: this.state.sending,
+      notSending: !this.state.sending,
+      sendError: this.state.sendError,
+      submitCursor: this.state.sending ? 'wait' : 'pointer',
+      submitOpacity: this.state.sending ? 0.65 : 1,
       menuOpen: this.state.menuOpen,
       toggleMenu: this.toggleMenu,
       contactOpen: this.state.contactOpen,
